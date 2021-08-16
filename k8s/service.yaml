@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springdemo
+  annotations:
+    metallb.universe.tf/address-pool: production-public-ips
+spec:
+  selector:
+    app: springdemo
+  ports:
+  - protocol: TCP
+    port: 9090
+    nodePort: 30081
+  type: NodePort

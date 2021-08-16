@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springdemo
+spec:
+  selector:
+      matchLabels:
+        app: springdemo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springdemo
+    spec:
+      containers:
+        - name: springdemo
+          image: gcr.io/niveusanthos/springdemo:v5
+          ports:
+            - containerPort: 9090
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password  
