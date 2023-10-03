@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springdemo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: springdemo
+  template:
+    metadata:
+      labels:
+        app: springdemo
+    spec:
+      containers:
+      - image: asia-south1-docker.pkg.dev/tech-rnd-project/niveus/springdemo:1.0.0
+        name: springdemo
+        ports:
+        - containerPort: 8080
